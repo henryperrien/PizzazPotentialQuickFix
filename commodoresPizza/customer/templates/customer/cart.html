@@ -1,0 +1,36 @@
+{% extends 'customer/base.html'%} {% block content %}
+
+
+<div class="container">
+    {% for item in items %}
+    <div class="row justify-content-center mt-5">
+      <div class="col-sm">
+        <div class="itemimage">
+            <img class="rounded" src ="{{item.MenuItem.image.url}}" width="75" height="50"/>
+        </div>
+      </div>
+      <div class="col-sm">
+        <p>{{item.MenuItem.name}}</p>
+      </div>
+      <div class="col-sm">
+        <a href="{% url 'increase_quantity' id=item.id %}" class="btn btn-outline-primary btn-sm">+</a>
+        <div class="name"><p>Qtn: {{item.quantity}}</p></div>
+        <a href="{% url 'decrease_quantity' id=item.id %}" class="btn btn-outline-danger btn-sm">-</a>
+      </div>
+      <div class="col-sm">
+        <div class="name"><p>Price: ${{item.MenuItem.price}}</p></div>
+      </div>
+      <div class="col-sm">
+        <div class="name"><p>Extd Price: ${{item.price}}</p></div>
+      </div>
+      <div class="col-sm">
+        <a href="{% url 'delete_cart_menu_item' id=item.id %}" class="btn btn-outline-danger btn-sm">Remove Item</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+<div class="payment">
+    <h3> Total: ${{cart.totalPrice}}</h3>
+</div>
+    {% endblock content %}

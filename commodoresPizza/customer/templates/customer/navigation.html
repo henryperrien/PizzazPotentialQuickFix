@@ -1,0 +1,85 @@
+<head>
+
+</head>
+<style>
+  nav {
+    margin-left: 300px;
+    padding: 0;
+    margin-right: 300px;
+}
+  .logo {
+  width: 400px;
+  height: auto;
+  display: block;
+
+}
+.test{
+  padding: 100px; /* Adjust as needed */
+  margin-left: 200px; /* Adjust as needed */
+}
+</style>
+
+
+<body>
+{% block content %}
+
+<container class = "test">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f8f8f8;">
+  <a class="navbar-brand" href="{% url 'index' %}">
+    
+    
+    
+    <img class="logo" src="\media\other_images\test.png">
+    
+    
+
+  </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'about' %}">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'cart' %}">Cart</a>
+      </li>
+{% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'register' %}">Register</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav> 
+
+
+<script>
+
+</script>
+</container>
+</body>
+{% endblock content %}
+
+
+
+

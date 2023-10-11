@@ -1,0 +1,98 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <style>
+        #message {
+        font-size: 64px;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px;
+        border: 2px solid black;
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px black;
+        width: 300px;
+        margin: 0 auto;
+        background-color: white;
+        display: none;
+        }
+    </style>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6 col-sm-12 text-center">
+            <h1>Menu</h1>
+        </div> 
+    </div>
+
+    <div class="row justify-content-center">
+        {% for item in menu_items %}
+        <div class="col-md-4 col-sm-12 text-center mb-5">
+            <div class="card text-center" style="width: 18rem;">
+                <img class="card-img-top" src="{{item.image.url}}" alt="Card image cap" width="200" height="150">
+                <div class="card-body">
+                  <h5 class="card-title">{{ item.name }}</h5>
+                  <p class="card-text">Price: ${{ item.price }}</p>
+                  <div class = "addCart">
+                    <button class="btn btn-primary" value = {{item.id}}>Add to Cart</button>
+                </div>
+                </div>
+              </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src = "{% static 'js/script.js' %}">
+
+</script>
+<body>
+    <style>
+        #questionnaire {
+        font-size: larger;
+        }
+    </style>
+    <h1>Pizza Questionnaire</h1>
+    
+    <button id="startButton">Start Questionnaire</button>
+    
+    <div id="questionnaire" style="display: none;">
+        <h2>Question:</h2>
+        <p>Do you like pineapple on pizza?</p>
+        <label><input type="radio" name="pineapple" value="yes1"> Oh yeah!</label>
+        <label><input type="radio" name="pineapple" value="yes2"> You bet I do!</label>
+        <label><input type="radio" name="pineapple" value="no"> Not really...</label>
+    
+        <br>
+        <button id="submitButton">Submit</button>
+    </div>
+    <div id="message" name="wrong">Wrong!</div> 
+    <div id="message" name="right">Right!</div> 
+    
+    <script>
+        const startButton = document.getElementById("startButton");
+        const questionnaire = document.getElementById("questionnaire");
+        const submitButton = document.getElementById("submitButton");
+    
+        startButton.addEventListener("click", () => {
+            startButton.style.display = "none";
+            questionnaire.style.display = "block";
+        });
+    
+        submitButton.addEventListener("click", () => {
+            const pineappleAns = document.querySelector('input[name="pineapple"]:checked');
+            const wMessage = document.querySelector('[name="wrong"]');
+            const rMessage = document.querySelector('[name="right"]');
+            
+            if (pineappleAns.getAttribute("value") === "no") {
+                wMessage.style.display = "block";
+                //alert("nope");
+            } else {
+                rMessage.style.display = "block";
+                //alert("yep");
+            }
+        });
+    </script>
+    
+</body>
+{% endblock content %}
